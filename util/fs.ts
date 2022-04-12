@@ -1,4 +1,4 @@
-import fs, { writeFile } from "fs";
+import fs from "fs";
 
 type FSResult<T> = Promise<
   | {
