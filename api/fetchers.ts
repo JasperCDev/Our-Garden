@@ -10,17 +10,8 @@ type FetcherResponse<T> =
       error: any;
     };
 
-export async function getClicks(): Promise<FetcherResponse<string>> {
-  return axios
-    .get<string>("/api/clicks")
-    .then((response) => ({
-      ok: true as true,
-      data: response.data,
-    }))
-    .catch((error) => ({
-      ok: false,
-      error,
-    }));
+export async function getClicks(): Promise<string> {
+  return axios.get<string>("/api/clicks").then((response) => response.data);
 }
 
 export async function updateClicks(
