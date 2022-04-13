@@ -1,15 +1,11 @@
 import axios from "axios";
 import type { NextPage } from "next";
 import { useEffect } from "react";
+import { updateClicks } from "../api/fetchers";
 
 const Home: NextPage = () => {
   useEffect(() => {
-    axios
-      .put("/api/clicks", {
-        clicks: "1",
-      })
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
+    updateClicks(5);
   }, []);
 
   return <div>Hello World</div>;
