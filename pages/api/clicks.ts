@@ -1,8 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { readFile, writeFile } from "../../util/fs";
 
+const DATABASE_PATH = "database/clicks.txt";
+
 async function getClicks(res: NextApiResponse) {
-  const readRes = await readFile("database/clicks.txt");
+  const readRes = await readFile(DATABASE_PATH);
 
   if (!readRes.ok) {
     res.status(500).json(readRes.error);
@@ -14,7 +16,7 @@ async function getClicks(res: NextApiResponse) {
 }
 
 async function updateClicks(req: NextApiRequest, res: NextApiResponse) {
-  const readRes = await readFile("database/clicks.txt");
+  const readRes = await readFile(DATABASE_PATH);
 
   if (!readRes.ok) {
     res.status(500).json(readRes.error);
@@ -23,10 +25,7 @@ async function updateClicks(req: NextApiRequest, res: NextApiResponse) {
 
   const clickCount = Number(readRes.data) + Number(req.body.clicks);
 
-  const writeRes = await writeFile(
-    "database/clicks.txt",
-    clickCount.toString()
-  );
+  const writeRes = await writeFile(DATABASE_PATH, clickCount.toString());
 
   if (!writeRes.ok) {
     res.status(500).json(writeRes.error);
