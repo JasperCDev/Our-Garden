@@ -21,7 +21,12 @@ async function updateClicks(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  const writeRes = await writeFile("database/clicks.txt", req.body.clicks);
+  const clickCount = Number(readRes.data) + Number(req.body.clicks);
+
+  const writeRes = await writeFile(
+    "database/clicks.txt",
+    clickCount.toString()
+  );
 
   if (!writeRes.ok) {
     res.status(500).json(writeRes.error);

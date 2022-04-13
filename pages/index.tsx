@@ -6,7 +6,7 @@ const Home: NextPage = () => {
   useEffect(() => {
     axios
       .put("/api/clicks", {
-        clicks: "123456789",
+        clicks: "1",
       })
       .then((response) => console.log(response))
       .catch((error) => console.log(error));
