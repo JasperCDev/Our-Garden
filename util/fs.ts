@@ -1,6 +1,6 @@
 import fs from "fs";
 
-type FSResult<T> = Promise<
+type FSResult<T> =
   | {
       ok: true;
       data: T;
@@ -8,8 +8,7 @@ type FSResult<T> = Promise<
   | {
       ok: false;
       error: any;
-    }
->;
+    };
 
 export async function readFile(path: string): Promise<FSResult<string>> {
   return fs.promises
