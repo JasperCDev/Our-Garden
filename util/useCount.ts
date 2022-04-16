@@ -3,7 +3,7 @@ import {
   ESTIMATED_SERVER_RESPONSE_TIME_MS,
   MILLISECONDS_SERVER_INTERVAL,
 } from "./constants";
-import GetClicks from "./getClicksSWR";
+import GetClicks from "./GetClicksSWR";
 
 export default function useCount() {
   const { data: newestCount } = GetClicks();
