@@ -1,11 +1,9 @@
 import useSWR from "swr";
 import { getClicks } from "../api/fetchers";
-import { GET_CLICKS_SWR_KEY, MILLISECONDS_SERVER_INTERVAL } from "./constants";
+import { GET_CLICKS_SWR_KEY } from "./constants";
 
 export default function GetClicks() {
-  const swrResponse = useSWR(GET_CLICKS_SWR_KEY, getClicks, {
-    refreshInterval: MILLISECONDS_SERVER_INTERVAL,
-  });
+  const swrResponse = useSWR(GET_CLICKS_SWR_KEY, getClicks);
 
   return {
     ...swrResponse,
