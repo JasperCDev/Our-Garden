@@ -3,6 +3,25 @@ import { readFile, writeFile } from "../../util/fs";
 
 const DATABASE_PATH = "database/clicks.txt";
 
+/* "robot" for testing */
+
+// const fakeReq = {
+//   body: {
+//     clicks: (Math.floor(Math.random() * 10) + 20).toString(),
+//   },
+// } as unknown as NextApiRequest;
+
+// const fakeRes = {
+//   status: (status: number) => fakeRes,
+//   json: (body: any) => {},
+// } as unknown as NextApiResponse;
+
+// setInterval(() => {
+//   updateClicks(fakeReq, fakeRes);
+// }, 10000);
+
+/* -------------------- */
+
 async function getClicks(res: NextApiResponse) {
   const readRes = await readFile(DATABASE_PATH);
 
