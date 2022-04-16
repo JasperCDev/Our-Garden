@@ -1,16 +1,11 @@
 import type { NextPage } from "next";
 import { useEffect } from "react";
-import useSWR from "swr";
-import { getClicks, updateClicks } from "../api/fetchers";
+import { updateClicks } from "../api/fetchers";
 import useCount from "../util/useCount";
 
 let sessionClicks = 0;
 
 const Home: NextPage = () => {
-  const { isValidating } = useSWR("/api/clicks", getClicks, {
-    refreshInterval: 1000,
-  });
-
   const count = useCount();
 
   const handleButtonClick = () => {
@@ -18,9 +13,17 @@ const Home: NextPage = () => {
   };
 
   useEffect(() => {
-    updateClicks(sessionClicks);
-    sessionClicks = 0;
-  }, [isValidating]);
+    /* send user clicks to database every second */
+    const interval = setInterval(() => {
+      updateClicks(sessionClicks);
+      // reset sessionclicks after update
+      sessionClicks = 0;
+    }, 1000);
+    /* ----------------------------------------- */
+
+    // unsbscribe from interval on unmount
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div>
