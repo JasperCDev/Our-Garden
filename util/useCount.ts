@@ -1,24 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import useSWR from "swr";
-import { getClicks } from "../api/fetchers";
 import {
   ESTIMATED_SERVER_RESPONSE_TIME_MS,
-  GET_CLICKS_SWR_KEY,
   MILLISECONDS_SERVER_INTERVAL,
 } from "./constants";
+import GetClicks from "./getClicksSWR";
 
 export default function useCount() {
-  const { data } = useSWR(GET_CLICKS_SWR_KEY, getClicks, {
-    refreshInterval: MILLISECONDS_SERVER_INTERVAL,
-    /* use SWR fallback to initalize data to 0, so that data will never be undefined */
-    fallback: {
-      "/api/clicks": 0,
-    },
-    /* ----------------------------------------------------------------------------- */
-  });
-
-  // convert global count to number and assert that it will always be truthy due to SWR fallback
-  const newestCount = Number(data!);
+  const { data: newestCount } = GetClicks();
 
   /* state needs to be in a ref so that I can access state within the requestAnimationFrame callback */
   const newestCountRef = useRef(0);
