@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { DATABASE_PATH } from "../../util/constants";
 import { readFile, writeFile } from "../../util/fs";
-
-const DATABASE_PATH = "database/clicks.txt";
 
 /* "robot" for testing */
 
@@ -18,7 +17,7 @@ const DATABASE_PATH = "database/clicks.txt";
 
 // setInterval(() => {
 //   updateClicks(fakeReq, fakeRes);
-// }, 10000);
+// }, 1000);
 
 /* -------------------- */
 

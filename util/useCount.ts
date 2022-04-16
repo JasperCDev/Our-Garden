@@ -1,10 +1,15 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import useSWR from "swr";
 import { getClicks } from "../api/fetchers";
+import {
+  ESTIMATED_SERVER_RESPONSE_TIME_MS,
+  GET_CLICKS_SWR_KEY,
+  MILLISECONDS_SERVER_INTERVAL,
+} from "./constants";
 
 export default function useCount() {
-  const { data } = useSWR("/api/clicks", getClicks, {
-    refreshInterval: 1000,
+  const { data } = useSWR(GET_CLICKS_SWR_KEY, getClicks, {
+    refreshInterval: MILLISECONDS_SERVER_INTERVAL,
     /* use SWR fallback to initalize data to 0, so that data will never be undefined */
     fallback: {
       "/api/clicks": 0,
@@ -41,7 +46,9 @@ export default function useCount() {
 
       const timePassed = currentTime - startTime;
 
-      let progress = timePassed / (1000 + 100);
+      let progress =
+        timePassed /
+        (MILLISECONDS_SERVER_INTERVAL + ESTIMATED_SERVER_RESPONSE_TIME_MS);
 
       // don't let progress go above 1
       if (progress > 1) progress = 1;

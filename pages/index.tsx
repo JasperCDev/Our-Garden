@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import { useEffect } from "react";
 import { updateClicks } from "../api/fetchers";
+import { MILLISECONDS_SERVER_INTERVAL } from "../util/constants";
 import useCount from "../util/useCount";
 
 let sessionClicks = 0;
@@ -18,7 +19,7 @@ const Home: NextPage = () => {
       updateClicks(sessionClicks);
       // reset sessionclicks after update
       sessionClicks = 0;
-    }, 1000);
+    }, MILLISECONDS_SERVER_INTERVAL);
     /* ----------------------------------------- */
 
     // unsbscribe from interval on unmount
