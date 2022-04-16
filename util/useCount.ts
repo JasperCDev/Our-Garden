@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { updateClicks } from "../api/fetchers";
 import {
   ESTIMATED_SERVER_RESPONSE_TIME_MS,
   MILLISECONDS_SERVER_INTERVAL,
@@ -6,21 +7,37 @@ import {
 import GetClicks from "./GetClicksSWR";
 
 export default function useCount() {
-  const { data: newestCount } = GetClicks();
-
-  /* state needs to be in a ref so that I can access state within the requestAnimationFrame callback */
-  const newestCountRef = useRef(0);
-  newestCountRef.current = newestCount;
-  /* ----------------------------------------------------------------------------------------------- */
+  const { data: newestCount, mutate } = GetClicks();
+  const [sessionClicks, setSessionClicks] = useState(0);
 
   const [currentCount, setCurrentCount] = useState(newestCount);
 
-  const animateCount = useCallback(() => {
-    if (!newestCountRef.current) return;
+  /* state needs to be in refs so that I can access state within the requestAnimationFrame callback */
+  const newestCountRef = useRef(0);
+  newestCountRef.current = newestCount;
 
-    if (newestCountRef.current <= currentCount) return;
+  const sessionClicksRef = useRef(0);
+  sessionClicksRef.current = sessionClicks;
 
-    let previousCount = currentCount;
+  const mutateRef = useRef(mutate);
+  mutateRef.current = mutate;
+
+  const currentCountRef = useRef(0);
+  currentCountRef.current = currentCount;
+  /* ----------------------------------------------------------------------------------------------- */
+
+  const incrementCount = () => {
+    setSessionClicks((x) => x + 1);
+    setCurrentCount((x) => x + 1);
+  };
+
+  useEffect(() => {
+    // count from api + the users clicks that haven't been sent to the api yet
+    let previousCount = currentCountRef.current;
+
+    if (newestCountRef.current <= previousCount) {
+      return;
+    }
 
     const range = newestCountRef.current - previousCount;
 
@@ -52,11 +69,26 @@ export default function useCount() {
 
     // run recursive animation
     requestAnimationFrame(callback);
-  }, [currentCount]);
+  }, [newestCount]);
 
   useEffect(() => {
-    animateCount();
-  }, [animateCount, newestCount]);
+    /* send user clicks to database every second */
+    let session_clicks: number;
+    const interval = setInterval(() => {
+      session_clicks = sessionClicksRef.current;
 
-  return currentCount;
+      updateClicks(session_clicks)
+        .then(() => mutateRef.current())
+        .then(() => {
+          // reset sessionclicks after update
+          setSessionClicks((x) => x - session_clicks);
+        });
+    }, MILLISECONDS_SERVER_INTERVAL);
+    /* ----------------------------------------- */
+
+    // unsubscribe from interval on unmount
+    return () => clearInterval(interval);
+  }, []);
+
+  return { count: currentCount, incrementCount };
 }
