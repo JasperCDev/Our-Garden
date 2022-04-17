@@ -1,14 +1,27 @@
 import React from "react";
-import { GetClicks2 } from "../util/GetClicksSWR";
-import Tile from "./tile";
+import { GET_CLICKS_SWR_KEY } from "../util/constants";
+import { GetClicks } from "../util/GetClicksSWR";
+import useCountInterval from "../util/useCountInterval";
+import Tile from "./Tile";
 
 export default function Tiles() {
-  const { data } = GetClicks2();
+  const { data } = GetClicks();
+  const { setSessionClickMap } = useCountInterval(GET_CLICKS_SWR_KEY);
+
+  const dataKeys = Object.keys(data || {});
 
   return (
     <div style={{ display: "flex", fontSize: "1rem", flexWrap: "wrap" }}>
-      {Object.keys(data || {}).map((key) => {
-        return <Tile key={key} clicks={data![key].clicks} />;
+      {dataKeys.map((key) => {
+        const clicks = data![key].clicks;
+        return (
+          <Tile
+            key={key}
+            clicks={clicks}
+            setSessionClickMap={setSessionClickMap}
+            id={key}
+          />
+        );
       })}
     </div>
   );

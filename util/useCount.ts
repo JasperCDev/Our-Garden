@@ -1,14 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { KeyedMutator } from "swr";
-import { updateClicks } from "../api/fetchers";
 import {
   ESTIMATED_SERVER_RESPONSE_TIME_MS,
   MILLISECONDS_SERVER_INTERVAL,
 } from "./constants";
-import { mutate } from "swr";
 
-export default function useCount<T>(newestCount: number, mutateKey: string) {
-  const [sessionClicks, setSessionClicks] = useState(0);
+export default function useCount<T>(newestCount: number) {
+  // const [sessionClicks, setSessionClicks] = useState(0);
 
   const [currentCount, setCurrentCount] = useState(newestCount);
 
@@ -16,18 +13,11 @@ export default function useCount<T>(newestCount: number, mutateKey: string) {
   const newestCountRef = useRef(0);
   newestCountRef.current = newestCount;
 
-  const sessionClicksRef = useRef(0);
-  sessionClicksRef.current = sessionClicks;
-
-  const mutateRef = useRef(mutate);
-  mutateRef.current = mutate;
-
   const currentCountRef = useRef(0);
   currentCountRef.current = currentCount;
   /* ----------------------------------------------------------------------------------------------- */
 
   const incrementCount = () => {
-    setSessionClicks((x) => x + 1);
     setCurrentCount((x) => x + 1);
   };
 
@@ -70,25 +60,6 @@ export default function useCount<T>(newestCount: number, mutateKey: string) {
     // run recursive animation
     requestAnimationFrame(callback);
   }, [newestCount]);
-
-  useEffect(() => {
-    /* send user clicks to database every second */
-    let session_clicks: number;
-    const interval = setInterval(() => {
-      session_clicks = sessionClicksRef.current;
-
-      updateClicks(session_clicks)
-        .then(() => mutateRef.current(mutateKey))
-        .then(() => {
-          // reset sessionclicks after update
-          setSessionClicks((x) => x - session_clicks);
-        });
-    }, MILLISECONDS_SERVER_INTERVAL);
-    /* ----------------------------------------- */
-
-    // unsubscribe from interval on unmount
-    return () => clearInterval(interval);
-  }, []);
 
   return { count: currentCount, incrementCount };
 }
