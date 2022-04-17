@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
+import { KeyedMutator } from "swr";
 import { updateClicks } from "../api/fetchers";
 import {
   ESTIMATED_SERVER_RESPONSE_TIME_MS,
   MILLISECONDS_SERVER_INTERVAL,
 } from "./constants";
-import GetClicks from "./GetClicksSWR";
+import { mutate } from "swr";
 
-export default function useCount() {
-  const { data: newestCount, mutate } = GetClicks();
+export default function useCount<T>(newestCount: number, mutateKey: string) {
   const [sessionClicks, setSessionClicks] = useState(0);
 
   const [currentCount, setCurrentCount] = useState(newestCount);
@@ -78,7 +78,7 @@ export default function useCount() {
       session_clicks = sessionClicksRef.current;
 
       updateClicks(session_clicks)
-        .then(() => mutateRef.current())
+        .then(() => mutateRef.current(mutateKey))
         .then(() => {
           // reset sessionclicks after update
           setSessionClicks((x) => x - session_clicks);

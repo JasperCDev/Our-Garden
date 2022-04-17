@@ -1,31 +1,19 @@
 import type { NextPage } from "next";
-import { useEffect } from "react";
+import React from "react";
+import Tiles from "../components/Tiles";
+import { GET_CLICKS_SWR_KEY } from "../util/constants";
+import GetClicks from "../util/GetClicksSWR";
 import useCount from "../util/useCount";
 
-interface ClickMap {
-  [key: string]: {
-    clicks: number;
-  };
-}
-
 const Home: NextPage = () => {
-  const { count, incrementCount } = useCount();
-
-  useEffect(() => {
-    const obj: ClickMap = {};
-    for (let i = 0; i < 16; i++) {
-      obj[i] = { clicks: 100 };
-    }
-    fetch("/api/clicks2", {
-      method: "PUT",
-      body: JSON.stringify(obj),
-    });
-  }, []);
+  const { data: newestCount } = GetClicks();
+  const { count, incrementCount } = useCount(newestCount, GET_CLICKS_SWR_KEY);
 
   return (
     <div>
       <div>{count}</div>
       <button onClick={incrementCount}>click me!</button>
+      <Tiles />
     </div>
   );
 };
