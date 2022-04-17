@@ -36,7 +36,7 @@ export default function useCountInterval<T>(mutateKey: string) {
   const clickMapRef = useRef({});
   clickMapRef.current = clickMap;
 
-  const sessionClickMapRef = useRef({});
+  const sessionClickMapRef = useRef<ClickMap>({});
   sessionClickMapRef.current = sessionClickMap;
 
   const mutateRef = useRef<ScopedMutator<T>>(mutate);
@@ -48,12 +48,22 @@ export default function useCountInterval<T>(mutateKey: string) {
 
   useEffect(() => {
     /* send user clicks to database every cycle */
+    let session_click_map: ClickMap = {};
     const interval = setInterval(() => {
+      session_click_map = sessionClickMapRef.current;
       updateClicks(sessionClickMapRef.current)
         .then(() => mutateRef.current(mutateKeyRef.current))
         .then(() => {
           // reset session after update
-          setSessionClickMap(defaultSessionClickMap);
+          const newSessionClickMap: ClickMap = {};
+          for (let key in Object.keys(session_click_map)) {
+            newSessionClickMap[key] = {
+              clicks:
+                sessionClickMapRef.current[key].clicks -
+                session_click_map[key].clicks,
+            };
+          }
+          setSessionClickMap(newSessionClickMap);
         });
     }, MILLISECONDS_SERVER_INTERVAL);
     /* ----------------------------------------- */
