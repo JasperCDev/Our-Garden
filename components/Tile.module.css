@@ -11,6 +11,6 @@
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 
-.tile:focus {
-  background-color: lightgreen;
+.tile:active {
+  background-color: lightcyan;
 }
