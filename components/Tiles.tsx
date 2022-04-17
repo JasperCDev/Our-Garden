@@ -6,7 +6,7 @@ import Tile from "./Tile";
 
 export default function Tiles() {
   const { data } = GetClicks();
-  useCountInterval(GET_CLICKS_SWR_KEY);
+  const { setSessionClickMap } = useCountInterval(GET_CLICKS_SWR_KEY);
 
   const dataKeys = Object.keys(data || {});
 
@@ -14,7 +14,14 @@ export default function Tiles() {
     <div style={{ display: "flex", fontSize: "1rem", flexWrap: "wrap" }}>
       {dataKeys.map((key) => {
         const clicks = data![key].clicks;
-        return <Tile key={key} clicks={clicks} />;
+        return (
+          <Tile
+            key={key}
+            clicks={clicks}
+            setSessionClickMap={setSessionClickMap}
+            id={key}
+          />
+        );
       })}
     </div>
   );
