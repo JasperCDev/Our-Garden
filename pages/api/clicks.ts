@@ -1,36 +1,17 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { DATABASE_PATH } from "../../util/constants";
 import { readFile, writeFile } from "../../util/fs";
+import { ClickMap } from "../../util/types";
 
-/* "robot" for testing */
-
-// const fakeReq = {
-//   body: {
-//     clicks: (Math.floor(Math.random() * 10) + 20).toString(),
-//   },
-// } as unknown as NextApiRequest;
-
-// const fakeRes = {
-//   status: (status: number) => fakeRes,
-//   json: (body: any) => {},
-// } as unknown as NextApiResponse;
-
-// setInterval(() => {
-//   updateClicks(fakeReq, fakeRes);
-// }, 1000);
-
-/* -------------------- */
-
-async function getClicks(res: NextApiResponse) {
-  const readRes = await readFile(DATABASE_PATH);
-
-  if (!readRes.ok) {
-    res.status(500).json(readRes.error);
+async function getClicks(req: NextApiRequest, res: NextApiResponse) {
+  const response = await readFile(DATABASE_PATH);
+  if (!response.ok) {
+    res.status(500).json(response.error);
     return;
   }
 
-  res.status(200).json(readRes.data);
-  return;
+  const arr = JSON.parse(response.data);
+  res.status(200).json(arr);
 }
 
 async function updateClicks(req: NextApiRequest, res: NextApiResponse) {
@@ -41,9 +22,22 @@ async function updateClicks(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  const clickCount = Number(readRes.data) + Number(req.body.clicks);
+  const reqClickMap: ClickMap = JSON.parse(req.body.clickMap);
+  const clickMap: ClickMap = JSON.parse(readRes.data);
 
-  const writeRes = await writeFile(DATABASE_PATH, clickCount.toString());
+  for (let indx of Object.keys(reqClickMap)) {
+    const dbClicks = clickMap[indx].clicks;
+    const reqClicks = reqClickMap[indx].clicks;
+
+    clickMap[indx] = {
+      clicks: dbClicks + reqClicks,
+    };
+  }
+
+  const writeRes = await writeFile(
+    "database/clicks.txt",
+    JSON.stringify(clickMap)
+  );
 
   if (!writeRes.ok) {
     res.status(500).json(writeRes.error);
@@ -56,7 +50,7 @@ async function updateClicks(req: NextApiRequest, res: NextApiResponse) {
 const clicks = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {
     case "GET":
-      return getClicks(res);
+      return getClicks(req, res);
     case "PUT":
       return updateClicks(req, res);
     default:
