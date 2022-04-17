@@ -1,6 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { readFile, writeFile } from "../../util/fs";
 
+interface ClickMap {
+  [key: string]: {
+    clicks: number;
+  };
+}
+
 async function getClicks(req: NextApiRequest, res: NextApiResponse) {
   const response = await readFile("database/clicks2.txt");
   if (!response.ok) {
@@ -20,13 +26,22 @@ async function updateClicks(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  const arr = JSON.parse(readRes.data);
+  const reqClickMap: ClickMap = JSON.parse(req.body);
+  const clickMap: ClickMap = JSON.parse(readRes.data);
 
-  for (let i = 0; i < arr.length; i++) {
-    arr[i].clicks = Math.floor(Math.random() * 100);
+  for (let indx of Object.keys(reqClickMap)) {
+    const dbClicks = clickMap[indx].clicks;
+    const reqClicks = reqClickMap[indx].clicks;
+
+    clickMap[indx] = {
+      clicks: dbClicks + reqClicks,
+    };
   }
 
-  const writeRes = await writeFile("database/clicks2.txt", JSON.stringify(arr));
+  const writeRes = await writeFile(
+    "database/clicks2.txt",
+    JSON.stringify(clickMap)
+  );
 
   if (!writeRes.ok) {
     res.status(500).json(writeRes.error);
