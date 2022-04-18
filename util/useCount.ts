@@ -4,9 +4,7 @@ import {
   MILLISECONDS_SERVER_INTERVAL,
 } from "./constants";
 
-export default function useCount<T>(newestCount: number) {
-  // const [sessionClicks, setSessionClicks] = useState(0);
-
+export default function useCount(newestCount: number) {
   const [currentCount, setCurrentCount] = useState(newestCount);
 
   /* state needs to be in refs so that I can access state within the requestAnimationFrame callback */
@@ -22,7 +20,6 @@ export default function useCount<T>(newestCount: number) {
   };
 
   useEffect(() => {
-    // count from api + the users clicks that haven't been sent to the api yet
     let previousCount = currentCountRef.current;
 
     if (newestCountRef.current <= previousCount) {
@@ -61,5 +58,10 @@ export default function useCount<T>(newestCount: number) {
     requestAnimationFrame(callback);
   }, [newestCount]);
 
-  return { count: currentCount, incrementCount };
+  return {
+    count: currentCount,
+    incrementCount,
+    // if we still need to count up to the newest count, then isCounting should be true
+    isCounting: newestCount > currentCount,
+  };
 }

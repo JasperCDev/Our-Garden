@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default function Tile(props: Props) {
-  const { incrementCount, count } = useCount(props.clicks);
+  const { incrementCount, count, isCounting } = useCount(props.clicks);
 
   function handleClick() {
     props.setSessionClickMap((map) => {
@@ -23,9 +23,19 @@ export default function Tile(props: Props) {
     });
     incrementCount();
   }
-
+  if (props.id === "15") {
+    console.log(isCounting);
+  }
   return (
-    <div className={styles.tile} onClick={handleClick}>
+    <div
+      className={styles.tile}
+      onClick={handleClick}
+      style={
+        {
+          "--background-color": isCounting ? "lightcyan" : "white",
+        } as React.CSSProperties
+      }
+    >
       {count}
     </div>
   );
