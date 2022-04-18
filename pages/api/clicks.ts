@@ -3,6 +3,42 @@ import { DATABASE_PATH } from "../../util/constants";
 import { readFile, writeFile } from "../../util/fs";
 import { ClickMap } from "../../util/types";
 
+/* "robot" for testing */
+
+// const fakeReq = {
+//   body: {
+//     clickMap: JSON.stringify({
+//       0: { clicks: 1 },
+//       1: { clicks: 1 },
+//       2: { clicks: 1 },
+//       3: { clicks: 1 },
+//       4: { clicks: 1 },
+//       5: { clicks: 1 },
+//       6: { clicks: 1 },
+//       7: { clicks: 1 },
+//       8: { clicks: 1 },
+//       9: { clicks: 1 },
+//       10: { clicks: 1 },
+//       11: { clicks: 1 },
+//       12: { clicks: 1 },
+//       13: { clicks: 1 },
+//       14: { clicks: 1 },
+//       15: { clicks: 1 },
+//     }),
+//   },
+// } as unknown as NextApiRequest;
+
+// const fakeRes = {
+//   status: (status: number) => fakeRes,
+//   json: (body: any) => {},
+// } as unknown as NextApiResponse;
+
+// setInterval(() => {
+//   updateClicks(fakeReq, fakeRes);
+// }, 1000);
+
+/* -------------------- */
+
 async function getClicks(req: NextApiRequest, res: NextApiResponse) {
   const response = await readFile(DATABASE_PATH);
   if (!response.ok) {
