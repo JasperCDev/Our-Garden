@@ -23,9 +23,7 @@ export default function Tile(props: Props) {
     });
     incrementCount();
   }
-  if (props.id === "15") {
-    console.log(isCounting);
-  }
+
   return (
     <div
       className={styles.tile}
