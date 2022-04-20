@@ -1,1 +1,1 @@
-{"0":{"clicks":70},"1":{"clicks":39},"2":{"clicks":115},"3":{"clicks":42},"4":{"clicks":94},"5":{"clicks":72},"6":{"clicks":113},"7":{"clicks":44},"8":{"clicks":136},"9":{"clicks":102},"10":{"clicks":144},"11":{"clicks":118},"12":{"clicks":45},"13":{"clicks":74},"14":{"clicks":181},"15":{"clicks":290}}
+{"0":{"clicks":135},"1":{"clicks":151},"2":{"clicks":126}}
