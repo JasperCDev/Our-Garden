@@ -1,0 +1,9 @@
+.tiles {
+  flex-wrap: wrap;
+  display: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  flex-direction: row;
+}

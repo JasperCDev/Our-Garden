@@ -3,6 +3,7 @@ import { GET_CLICKS_SWR_KEY } from "../util/constants";
 import { GetClicks } from "../util/GetClicksSWR";
 import useCountInterval from "../util/useCountInterval";
 import Tile from "./Tile";
+import styles from "./Tiles.module.css";
 
 export default function Tiles() {
   const { data } = GetClicks();
@@ -11,7 +12,7 @@ export default function Tiles() {
   const dataKeys = Object.keys(data || {});
 
   return (
-    <div style={{ display: "flex", fontSize: "1rem", flexWrap: "wrap" }}>
+    <div className={styles.tiles}>
       {dataKeys.map((key) => {
         const clicks = data![key].clicks;
         return (
