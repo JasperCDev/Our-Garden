@@ -1,6 +1,6 @@
 .tiles {
   flex-wrap: wrap;
-  display: wrap;
+  display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
