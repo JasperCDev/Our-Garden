@@ -1,6 +1,7 @@
 import React from "react";
 import { ClickMap } from "../util/types";
 import useCount from "../util/useCount";
+import Plant from "./Plant";
 import styles from "./Tile.module.css";
 
 interface Props {
@@ -34,6 +35,7 @@ export default function Tile(props: Props) {
         } as React.CSSProperties
       }
     >
+      <Plant />
       {count}
     </div>
   );

@@ -1,8 +1,12 @@
 .tile {
   width: 100px;
   border: 1px solid black;
-  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
      -khtml-user-select: none; /* Konqueror HTML */
@@ -14,5 +18,5 @@
 }
 
 .tile:active {
-  background-color: lightgreen;
+  /* background-color: lightgrey; */
 }
