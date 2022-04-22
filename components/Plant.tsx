@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./Plant.module.css";
 
 export default function Plant() {
   return (
@@ -8,6 +9,7 @@ export default function Plant() {
       viewBox="0 0 64 257"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={styles.plant}
     >
       <path
         d="M48 233.5C52.3618 233.5 56.2862 234.33 59.1015 235.649C61.9566 236.988 63.5 238.737 63.5 240.5C63.5 242.263 61.9566 244.012 59.1015 245.351C56.2862 246.67 52.3618 247.5 48 247.5C43.6382 247.5 39.7138 246.67 36.8985 245.351C34.0434 244.012 32.5 242.263 32.5 240.5C32.5 238.737 34.0434 236.988 36.8985 235.649C39.7138 234.33 43.6382 233.5 48 233.5Z"

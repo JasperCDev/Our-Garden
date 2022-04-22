@@ -1,0 +1,9 @@
+.plant {
+  animation: sway 3s infinite ease-in-out;
+  transform-origin: bottom;
+}
+
+@keyframes sway {
+  33% { transform: rotate(10deg); }
+  66% { transform: rotate(-10deg); }
+}
