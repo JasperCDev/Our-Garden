@@ -17,7 +17,6 @@
   background-color: var(--background-color);
   opacity: 0.8;
   transition: background-color 1s ease-in-out;
-
 }
 
 .tile:active {

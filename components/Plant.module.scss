@@ -21,10 +21,13 @@
 .stem {
   stroke-dasharray: 250;
   stroke-dashoffset: var(--off-set);
+  stroke-linecap: round;
+  stroke-width: 3;
+  stroke: darkgreen;
 }
 
 .leaf {
-
+  fill: lightgreen;
 }
 
   .leaf1 {
