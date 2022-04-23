@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Plant.module.css";
+import styles from "./Plant.module.scss";
 
 export default function Plant() {
   return (
@@ -103,6 +103,7 @@ export default function Plant() {
           stroke="#D2FFB7"
         />
         <path
+          className={styles.stem}
           d="M32 5V255"
           stroke="#006D1F"
           strokeWidth="3"

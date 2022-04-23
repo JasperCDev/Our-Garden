@@ -1,0 +1,27 @@
+.plantContainer {}
+
+.plant {
+  animation: sway 3s infinite ease-in-out;
+  transform-origin: bottom;
+}
+
+.stem {
+  stroke-dasharray: 250;
+  stroke-dashoffset: -250;
+  animation: dash 5s linear forwards;
+}
+
+@keyframes dash {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.plant2 {
+
+}
+
+@keyframes sway {
+  33% { transform: rotate(10deg); }
+  66% { transform: rotate(-10deg); }
+}
