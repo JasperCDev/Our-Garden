@@ -1,6 +1,5 @@
 .tile {
   width: 100px;
-  border: 1px solid black;
   justify-content: center;
   align-items: center;
   padding: 3rem;
@@ -15,8 +14,10 @@
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
   background-color: var(--background-color);
+  transition: background-color 1s ease-in-out;
 }
 
 .tile:active {
-  /* background-color: lightgrey; */
+  background-color: #c2ffff;
+  transition: none;
 }
