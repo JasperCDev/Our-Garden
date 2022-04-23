@@ -5,7 +5,7 @@ import {
 } from "./constants";
 
 export default function useCount(newestCount: number) {
-  const [currentCount, setCurrentCount] = useState(newestCount);
+  const [currentCount, setCurrentCount] = useState(0);
 
   /* state needs to be in refs so that I can access state within the requestAnimationFrame callback */
   const newestCountRef = useRef(0);
