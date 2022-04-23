@@ -1,4 +1,6 @@
-.plantContainer {}
+.plantContainer {
+  --off-set: -250;
+}
 
 .plant {
   animation: sway 3s infinite ease-in-out;
@@ -7,14 +9,7 @@
 
 .stem {
   stroke-dasharray: 250;
-  stroke-dashoffset: -250;
-  animation: dash 5s linear forwards;
-}
-
-@keyframes dash {
-  100% {
-    stroke-dashoffset: 0;
-  }
+  stroke-dashoffset: var(--off-set);
 }
 
 .plant2 {

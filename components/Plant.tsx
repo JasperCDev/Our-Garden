@@ -1,9 +1,25 @@
 import React from "react";
 import styles from "./Plant.module.scss";
 
-export default function Plant() {
+function getOffSet(current: number, target: number, pathlength: number) {
+  const progress = Math.min(current / target, 1);
+  return progress * pathlength - pathlength;
+}
+
+interface Props {
+  count: number;
+}
+
+export default function Plant(props: Props) {
   return (
-    <div className={styles.plantContainer}>
+    <div
+      className={styles.plantContainer}
+      style={
+        {
+          "--off-set": getOffSet(props.count, 1000, 250),
+        } as React.CSSProperties
+      }
+    >
       <svg
         width="64"
         height="257"

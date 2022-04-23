@@ -35,7 +35,7 @@ export default function Tile(props: Props) {
         } as React.CSSProperties
       }
     >
-      <Plant />
+      <Plant count={count} />
       <h1>{count}</h1>
     </div>
   );
