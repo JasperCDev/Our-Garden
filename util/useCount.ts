@@ -22,7 +22,7 @@ export default function useCount(newestCount: number) {
   useEffect(() => {
     let previousCount = currentCountRef.current;
 
-    if (newestCountRef.current === previousCount) {
+    if (newestCountRef.current <= previousCount) {
       return;
     }
 
