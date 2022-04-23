@@ -36,7 +36,7 @@ export default function Tile(props: Props) {
       }
     >
       <Plant count={count} />
-      <h1>{count}</h1>
+      <h2>{count}</h2>
     </div>
   );
 }

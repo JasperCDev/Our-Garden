@@ -2,7 +2,8 @@
   width: 100px;
   justify-content: center;
   align-items: center;
-  padding: 3rem;
+  padding: 2rem;
+  margin: 1rem;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -14,7 +15,9 @@
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
   background-color: var(--background-color);
+  opacity: 0.8;
   transition: background-color 1s ease-in-out;
+
 }
 
 .tile:active {

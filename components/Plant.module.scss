@@ -1,11 +1,21 @@
 .plantContainer {
   --off-set: -250;
+  // for loop!!!
+  @for $i from 1 through 8 {
+    --leaf#{$i}-scale: 0.1;
+  }
 }
 
 .plant {
   animation: sway 5s infinite ease-in-out;
   animation-delay: 3s;
   transform-origin: bottom;
+  transition: transform 2s;
+}
+
+@keyframes sway {
+  33% { transform: rotate(10deg); }
+  66% { transform: rotate(-10deg); }
 }
 
 .stem {
@@ -14,15 +24,45 @@
 }
 
 .leaf {
-  opacity: 0;
-  animation: fade-in 1s ease-in forwards;
+
 }
 
-@keyframes fade-in {
-  100% { opacity: 100%; }
-}
+  .leaf1 {
+    transform: scale(var(--leaf1-scale));
+    transform-origin: 32px 186px;
+  }
 
-@keyframes sway {
-  33% { transform: rotate(10deg); }
-  66% { transform: rotate(-10deg); }
-}
+  .leaf2 {
+    transform: scale(var(--leaf2-scale));
+    transform-origin: 32px 172px;
+  }
+
+  .leaf3 {
+    transform: scale(var(--leaf3-scale));
+    transform-origin: 32px 125px;
+  }
+
+  .leaf4 {
+    transform: scale(var(--leaf4-scale));
+    transform-origin: 32px 111px;
+  }
+
+  .leaf5 {
+    transform: scale(var(--leaf5-scale));
+    transform-origin: 32px 64px;
+  }
+
+  .leaf6 {
+    transform: scale(var(--leaf6-scale));
+    transform-origin: 32px 50px;
+  }
+
+  .leaf7 {
+    transform: scale(var(--leaf6-scale));
+    transform-origin: 32px 5px;
+  }
+
+  .leaf8 {
+    transform: scale(var(--leaf6-scale));
+    transform-origin: 32px 5px;
+  }
