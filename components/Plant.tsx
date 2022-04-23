@@ -14,14 +14,14 @@ function getStemWidth(current: number, target: number) {
 const maxClicks = 100;
 
 const leafPoints: { [key: string]: number } = {
-  leaf1: maxClicks * 0.28,
-  leaf2: maxClicks * 0.34,
-  leaf3: maxClicks * 0.52,
-  leaf4: maxClicks * 0.58,
-  leaf5: maxClicks * 0.76,
-  leaf6: maxClicks * 0.82,
-  leaf7: maxClicks * 1.0,
-  leaf8: maxClicks * 1.0,
+  leaf1: Math.round(maxClicks * 0.28),
+  leaf2: Math.round(maxClicks * 0.34),
+  leaf3: Math.round(maxClicks * 0.52),
+  leaf4: Math.round(maxClicks * 0.58),
+  leaf5: Math.round(maxClicks * 0.76),
+  leaf6: Math.round(maxClicks * 0.82),
+  leaf7: Math.round(maxClicks * 1.0),
+  leaf8: Math.round(maxClicks * 1.0),
 };
 
 interface Props {
