@@ -6,6 +6,11 @@ function getOffSet(current: number, target: number, pathlength: number) {
   return progress * pathlength - pathlength;
 }
 
+function getStemWidth(current: number, target: number) {
+  const progress = Math.min(current / target, 1);
+  return Math.max(progress * 3, 1);
+}
+
 const maxClicks = 100;
 
 const leafPoints: { [key: string]: number } = {
@@ -28,6 +33,8 @@ export default function Plant(props: Props) {
     const style: typeof leafPoints = {};
 
     style["--off-set"] = getOffSet(props.count, maxClicks, 250);
+
+    style["--stem-width"] = getStemWidth(props.count, maxClicks);
 
     for (const leaf in leafPoints) {
       const points = leafPoints[leaf];
