@@ -9,15 +9,16 @@
 }
 
 .plant {
-  animation: sway 5s infinite ease-in-out;
+  animation: sway 3s infinite ease-in-out alternate;
   animation-delay: 3s;
   transform-origin: bottom;
   transition: transform 2s;
 }
 
 @keyframes sway {
-  33% { transform: rotate(10deg); }
-  66% { transform: rotate(-10deg); }
+  33% { transform: rotate(5deg);}
+  66% { transform: rotate(10deg); }
+  100% { transform: rotate(-10deg); }
 }
 
 .stem {
