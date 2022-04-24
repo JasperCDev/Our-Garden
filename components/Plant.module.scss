@@ -5,6 +5,7 @@
   @for $i from 1 through 8 {
     --leaf#{$i}-scale: 0.1;
   }
+  position: relative;
 }
 
 .plant {
@@ -31,42 +32,60 @@
   fill: lightgreen;
 }
 
-  .leaf1 {
-    transform: scale(var(--leaf1-scale));
-    transform-origin: 32px 186px;
-  }
+// @for $i from 1 through 8 {
+//   .leaf#{$i} {
+//     transform: scale(var(--leaf#{$i}-scale));
+//     @if $i % 2 == 0 {
+//       transform-origin: 32px (186px + ($i * 45));
 
-  .leaf2 {
-    transform: scale(var(--leaf2-scale));
-    transform-origin: 32px 172px;
-  }
+//     } @else {
+//       transform-origin: 32px (172px + ($i * 45));
+//     }
+//   }
+// }
 
-  .leaf3 {
-    transform: scale(var(--leaf3-scale));
-    transform-origin: 32px 125px;
-  }
+.leaf1 {
+  transform: scale(var(--leaf1-scale));
+  transform-origin: 32px 186px;
+}
 
-  .leaf4 {
-    transform: scale(var(--leaf4-scale));
-    transform-origin: 32px 111px;
-  }
+.leaf2 {
+  transform: scale(var(--leaf2-scale));
+  transform-origin: 32px 172px;
+}
 
-  .leaf5 {
-    transform: scale(var(--leaf5-scale));
-    transform-origin: 32px 64px;
-  }
+.leaf3 {
+  transform: scale(var(--leaf3-scale));
+  transform-origin: 32px 125px;
+}
 
-  .leaf6 {
-    transform: scale(var(--leaf6-scale));
-    transform-origin: 32px 50px;
-  }
+.leaf4 {
+  transform: scale(var(--leaf4-scale));
+  transform-origin: 32px 111px;
+}
 
-  .leaf7 {
-    transform: scale(var(--leaf6-scale));
-    transform-origin: 32px 5px;
-  }
+.leaf5 {
+  transform: scale(var(--leaf5-scale));
+  transform-origin: 32px 64px;
+}
 
-  .leaf8 {
-    transform: scale(var(--leaf6-scale));
-    transform-origin: 32px 5px;
-  }
+.leaf6 {
+  transform: scale(var(--leaf6-scale));
+  transform-origin: 32px 50px;
+}
+
+.leaf7 {
+  transform: scale(var(--leaf7-scale));
+  transform-origin: 32px 5px;
+}
+
+.leaf8 {
+  transform: scale(var(--leaf8-scale));
+  transform-origin: 32px 5px;
+}
+
+.soil {
+  position: absolute;
+  bottom: 0px;
+  transform: translateY(-50%);
+}

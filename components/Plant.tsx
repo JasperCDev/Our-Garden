@@ -48,6 +48,16 @@ export default function Plant(props: Props) {
     <div className={styles.plantContainer} style={plantCustomProperties}>
       <svg
         width="100"
+        height="20"
+        viewBox="0 0 100 20"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={styles.soil}
+      >
+        <ellipse cx="50" cy="10" rx="50" ry="10" fill="#A0522D" />
+      </svg>
+      <svg
+        width="100"
         height="257"
         viewBox="0 0 64 257"
         fill="none"
