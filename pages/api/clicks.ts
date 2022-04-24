@@ -1,7 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { DATABASE_PATH } from "../../util/constants";
+// import { DATABASE_PATH } from "util/constants";
 import { readFile, writeFile } from "./_fs";
 import { ClickMap } from "../../util/types";
+
+const DATABASE_PATH = "./_clicks.txt";
 
 /* "robot" for testing */
 
