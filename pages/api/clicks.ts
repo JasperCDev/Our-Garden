@@ -1,7 +1,15 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { DATABASE_PATH } from "../../util/constants";
-import { readFile, writeFile } from "../../util/fs";
-import { ClickMap } from "../../util/types";
+// import { DATABASE_PATH } from "../../util/constants";
+import { readFile, writeFile } from "./_fs";
+// import { ClickMap } from "../../util/types";
+
+export const DATABASE_PATH = "database/clicks.txt";
+
+export interface ClickMap {
+  [key: string]: {
+    clicks: number;
+  };
+}
 
 /* "robot" for testing */
 
