@@ -40,8 +40,14 @@ export default function useCount(newestCount: number) {
       // don't let progress go above 1
       if (progress > 1) progress = 1;
 
-      // set state and round to avoid decimals
-      setCurrentCount(previousCount + Math.round(progress * range));
+      // if (currentCountRef.current > previousCount)
+      const newCount = previousCount + Math.round(progress * range);
+
+      // since currentCount can be set outside of this RAF, we need to make sure we don't set it as a number lower than the current value
+      if (newCount > currentCountRef.current) {
+        // set state and round to avoid decimals
+        setCurrentCount(newCount);
+      }
 
       // if progress is not complete, then recurse
       if (progress !== 1) {
