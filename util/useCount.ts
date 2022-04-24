@@ -1,8 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  ESTIMATED_SERVER_RESPONSE_TIME_MS,
-  MILLISECONDS_SERVER_INTERVAL,
-} from "./constants";
+import { MILLISECONDS_SERVER_INTERVAL } from "./constants";
 
 export default function useCount(newestCount: number) {
   const [currentCount, setCurrentCount] = useState(0);
@@ -38,9 +35,7 @@ export default function useCount(newestCount: number) {
 
       const timePassed = currentTime - startTime;
 
-      let progress =
-        timePassed /
-        (MILLISECONDS_SERVER_INTERVAL + ESTIMATED_SERVER_RESPONSE_TIME_MS);
+      let progress = timePassed / MILLISECONDS_SERVER_INTERVAL;
 
       // don't let progress go above 1
       if (progress > 1) progress = 1;
