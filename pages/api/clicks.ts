@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
-// import { DATABASE_PATH } from "util/constants";
 import { readFile, writeFile } from "./_fs";
 import { ClickMap } from "../../util/types";
+import path from "path";
 
-const DATABASE_PATH = "./_clicks.txt";
+const DATABASE_PATH = path.resolve(process.cwd(), "database/clicks.txt");
 
 /* "robot" for testing */
 
