@@ -1,7 +1,7 @@
 .plantContainer {
   --off-set: -250;
   --stem-width: 1;
-  // for loop!!!
+
   @for $i from 1 through 8 {
     --leaf#{$i}-scale: 0.1;
   }
@@ -33,56 +33,20 @@
   fill: lightgreen;
 }
 
-// @for $i from 1 through 8 {
-//   .leaf#{$i} {
-//     transform: scale(var(--leaf#{$i}-scale));
-//     @if $i % 2 == 0 {
-//       transform-origin: 32px (186px + ($i * 45));
+@for $i from 1 through 8 {
+  .leaf#{$i} {
+    transform: scale(var(--leaf#{$i}-scale));
+    /*
+    the transform origin y-offset can be calculated this way because the odds and evens are evenly spaced respectively.
 
-//     } @else {
-//       transform-origin: 32px (172px + ($i * 45));
-//     }
-//   }
-// }
-
-.leaf1 {
-  transform: scale(var(--leaf1-scale));
-  transform-origin: 32px 186px;
-}
-
-.leaf2 {
-  transform: scale(var(--leaf2-scale));
-  transform-origin: 32px 172px;
-}
-
-.leaf3 {
-  transform: scale(var(--leaf3-scale));
-  transform-origin: 32px 125px;
-}
-
-.leaf4 {
-  transform: scale(var(--leaf4-scale));
-  transform-origin: 32px 111px;
-}
-
-.leaf5 {
-  transform: scale(var(--leaf5-scale));
-  transform-origin: 32px 64px;
-}
-
-.leaf6 {
-  transform: scale(var(--leaf6-scale));
-  transform-origin: 32px 50px;
-}
-
-.leaf7 {
-  transform: scale(var(--leaf7-scale));
-  transform-origin: 32px 5px;
-}
-
-.leaf8 {
-  transform: scale(var(--leaf8-scale));
-  transform-origin: 32px 5px;
+    max() is used here so that the last two leaves have the same transform-origin y-offset of 5px.
+    */
+    @if $i % 2 == 0 {
+      transform-origin: 32px max(233px - ($i * 30.5), 5px);
+    } @else {
+      transform-origin: 32px max(216.5px - ($i * 30.5), 5px);
+    }
+  }
 }
 
 .soil {
