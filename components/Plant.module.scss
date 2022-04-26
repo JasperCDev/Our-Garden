@@ -6,6 +6,7 @@
     --leaf#{$i}-scale: 0.1;
   }
   position: relative;
+  display: block;
 }
 
 .plant {
@@ -15,7 +16,6 @@
   -webkit-animation-delay: 3s;
   transform-origin: bottom;
   transition: transform 2s;
-  // display: block;
 }
 
 @keyframes sway {
