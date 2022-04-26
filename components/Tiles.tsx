@@ -18,7 +18,7 @@ export default function Tiles() {
             key={key}
             clicks={clicks}
             setSessionClickMap={setSessionClickMap}
-            id={Number(key)}
+            id={key}
           />
         );
       })}

@@ -1,3 +1,3 @@
 export interface ClickMap {
-  [key: number]: number;
+  [key: string]: number;
 }

@@ -7,7 +7,7 @@ import styles from "./Tile.module.css";
 interface Props {
   clicks: number;
   setSessionClickMap: React.Dispatch<React.SetStateAction<ClickMap>>;
-  id: number;
+  id: string;
 }
 
 export default function Tile(props: Props) {
