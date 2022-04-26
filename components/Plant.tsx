@@ -2,8 +2,7 @@ import React, { CSSProperties, useMemo } from "react";
 import styles from "./Plant.module.scss";
 
 function getOffSet(current: number, target: number, pathlength: number) {
-  const currentCount = Math.max(current, 20);
-  const progress = Math.min(currentCount / target, 1);
+  const progress = Math.min(current / target, 1);
   return progress * pathlength + pathlength;
 }
 
@@ -12,7 +11,7 @@ function getStemWidth(current: number, target: number) {
   return Math.max(progress * 3, 1);
 }
 
-const maxClicks = 100;
+const maxClicks = 10000;
 
 const leafPoints: { [key: string]: number } = {
   leaf1: Math.round(maxClicks * 0.28),
@@ -39,7 +38,7 @@ export default function Plant(props: Props) {
 
     for (const leaf in leafPoints) {
       const points = leafPoints[leaf];
-      style[`--${leaf}-scale`] = Math.min(props.count / (points * 3), 1);
+      style[`--${leaf}-scale`] = Math.min(props.count / (points * 2), 1);
     }
 
     return style;
