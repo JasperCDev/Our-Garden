@@ -5,7 +5,7 @@ import { updateClicks } from "../api/fetchers";
 import { MILLISECONDS_SERVER_INTERVAL } from "./constants";
 import { GetClicks } from "./GetClicksSWR";
 import { ClickMap } from "./types";
-import defaultClickMap from "./defaultClickMap.json";
+import defaultClickMap from "./defaultClickMap";
 
 export default function useCountInterval<T>(mutateKey: string) {
   const { data: clickMap } = GetClicks();
@@ -38,11 +38,8 @@ export default function useCountInterval<T>(mutateKey: string) {
           // generate new click map who's properties are equal to the current session click map minus the closure click map we defined before we called updateClicks. This is to prevent the clicks done during this update from being lost
           const newSessionClickMap: ClickMap = {};
           for (let key in Object.keys(session_click_map)) {
-            newSessionClickMap[key] = {
-              clicks:
-                sessionClickMapRef.current[key].clicks -
-                session_click_map[key].clicks,
-            };
+            newSessionClickMap[key] =
+              sessionClickMapRef.current[key] - session_click_map[key];
           }
 
           setSessionClickMap(newSessionClickMap);

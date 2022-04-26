@@ -9,18 +9,16 @@ export default function Tiles() {
   const { data } = GetClicks();
   const { setSessionClickMap } = useCountInterval(GET_CLICKS_SWR_KEY);
 
-  const dataKeys = Object.keys(data || {});
-
   return (
     <div className={styles.tiles}>
-      {dataKeys.map((key) => {
-        const clicks = data![key].clicks;
+      {Object.keys(data).map((key) => {
+        const clicks = data[Number(key)];
         return (
           <Tile
             key={key}
             clicks={clicks}
             setSessionClickMap={setSessionClickMap}
-            id={key}
+            id={Number(key)}
           />
         );
       })}

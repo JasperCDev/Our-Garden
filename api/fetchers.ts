@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ClickMap } from "../util/types";
 
 type FetcherResponse<T> =
   | {
@@ -9,12 +10,6 @@ type FetcherResponse<T> =
       ok: false;
       error: any;
     };
-
-interface ClickMap {
-  [key: string]: {
-    clicks: number;
-  };
-}
 
 export async function getClicks(): Promise<ClickMap> {
   return axios.get<ClickMap>("/api/clicks").then((response) => response.data);
