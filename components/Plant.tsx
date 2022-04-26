@@ -3,7 +3,7 @@ import styles from "./Plant.module.scss";
 
 function getOffSet(current: number, target: number, pathlength: number) {
   const progress = Math.min(current / target, 1);
-  return progress * pathlength - pathlength;
+  return progress * pathlength + pathlength;
 }
 
 function getStemWidth(current: number, target: number) {
