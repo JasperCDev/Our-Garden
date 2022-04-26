@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import redisClient from "util/redis";
+import redisClient from "database/redis";
 
 const redis = async (req: NextApiRequest, res: NextApiResponse) => {
   await redisClient.del("clickMap");

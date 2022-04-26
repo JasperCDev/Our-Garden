@@ -4,10 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run seed && next build",
+    "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "seed": "node database/seed.js"
+    "lint": "next lint"
   },
   "dependencies": {
     "axios": "^0.26.1",

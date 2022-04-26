@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import redisClient from "util/redis";
+import redisClient from "database/redis";
 import { ClickMap } from "../../util/types";
 
 const clicks = async (req: NextApiRequest, res: NextApiResponse) => {
