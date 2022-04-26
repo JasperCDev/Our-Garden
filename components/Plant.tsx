@@ -2,7 +2,8 @@ import React, { CSSProperties, useMemo } from "react";
 import styles from "./Plant.module.scss";
 
 function getOffSet(current: number, target: number, pathlength: number) {
-  const progress = Math.min(current / target, 1);
+  const currentCount = Math.max(current, 20);
+  const progress = Math.min(currentCount / target, 1);
   return progress * pathlength + pathlength;
 }
 
