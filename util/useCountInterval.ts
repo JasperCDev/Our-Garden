@@ -76,8 +76,8 @@ export default function useCountInterval<T>(mutateKey: string) {
   }, []);
 
   function incrementSessionClickMap(id: string) {
-    if (!isActive) {
-      isActive = true;
+    if (!hasClicked) {
+      hasClicked = true;
     }
     setSessionClickMap((map) => {
       return {
