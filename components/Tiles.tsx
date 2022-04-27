@@ -7,7 +7,7 @@ import styles from "./Tiles.module.css";
 
 export default function Tiles() {
   const { data } = GetClicks();
-  const { setSessionClickMap } = useCountInterval(GET_CLICKS_SWR_KEY);
+  const { incrementSessionClickMap } = useCountInterval(GET_CLICKS_SWR_KEY);
 
   return (
     <div className={styles.tiles}>
@@ -17,7 +17,7 @@ export default function Tiles() {
           <Tile
             key={key}
             clicks={clicks}
-            setSessionClickMap={setSessionClickMap}
+            incrementSessionClickMap={incrementSessionClickMap}
             id={key}
           />
         );

@@ -7,6 +7,9 @@ import { GetClicks } from "./GetClicksSWR";
 import { ClickMap } from "./types";
 import defaultClickMap from "./defaultClickMap";
 
+let hasClicked = false;
+let isActive = true;
+
 export default function useCountInterval<T>(mutateKey: string) {
   const { data: clickMap } = GetClicks();
 
@@ -27,29 +30,62 @@ export default function useCountInterval<T>(mutateKey: string) {
   mutateKeyRef.current = mutateKey;
   /* ----------------------------------------------------------------------------------------------- */
 
+  async function getAndUpdateClicks(previousSessionClickMap: ClickMap) {
+    if (!isActive) return;
+    if (hasClicked) {
+      hasClicked = false;
+      await updateClicks(sessionClickMapRef.current);
+    }
+    await mutateRef.current(mutateKey);
+    // generate new click map who's properties are equal to the current session previous click map argument. This is to prevent the clicks done during this update from being lost
+    const newSessionClickMap: ClickMap = {};
+    for (let key in Object.keys(previousSessionClickMap)) {
+      newSessionClickMap[key] =
+        sessionClickMapRef.current[key] - previousSessionClickMap[key];
+    }
+    setSessionClickMap(newSessionClickMap);
+  }
+
   useEffect(() => {
     /* send user clicks to database every cycle */
-    let session_click_map: ClickMap = {};
     const interval = setInterval(() => {
-      session_click_map = sessionClickMapRef.current;
-      updateClicks(sessionClickMapRef.current)
-        .then(() => mutateRef.current(mutateKeyRef.current))
-        .then(() => {
-          // generate new click map who's properties are equal to the current session click map minus the closure click map we defined before we called updateClicks. This is to prevent the clicks done during this update from being lost
-          const newSessionClickMap: ClickMap = {};
-          for (let key in Object.keys(session_click_map)) {
-            newSessionClickMap[key] =
-              sessionClickMapRef.current[key] - session_click_map[key];
-          }
-
-          setSessionClickMap(newSessionClickMap);
-        });
+      getAndUpdateClicks(sessionClickMapRef.current);
     }, MILLISECONDS_SERVER_INTERVAL);
     /* ----------------------------------------- */
 
-    // unsubscribe from interval on unmount
-    return () => clearInterval(interval);
+    let onBlur: (this: Window, ev: FocusEvent) => any;
+    let onFocus: (this: Window, ev: FocusEvent) => any;
+    if (typeof window !== undefined) {
+      onBlur = () => {
+        isActive = false;
+      };
+
+      onFocus = () => {
+        isActive = true;
+      };
+
+      window.addEventListener("blur", onBlur);
+      window.addEventListener("focus", onFocus);
+    }
+    // unsubscribe from subscriptions on unmount
+    return () => {
+      window.removeEventListener("blur", onBlur);
+      window.removeEventListener("focus", onFocus);
+      clearInterval(interval);
+    };
   }, []);
 
-  return { sessionClickMap, setSessionClickMap };
+  function incrementSessionClickMap(id: string) {
+    if (!isActive) {
+      isActive = true;
+    }
+    setSessionClickMap((map) => {
+      return {
+        ...map,
+        [id]: map[id] + 1,
+      };
+    });
+  }
+
+  return { sessionClickMap, incrementSessionClickMap };
 }

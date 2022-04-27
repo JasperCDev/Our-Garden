@@ -6,7 +6,7 @@ import styles from "./Tile.module.css";
 
 interface Props {
   clicks: number;
-  setSessionClickMap: React.Dispatch<React.SetStateAction<ClickMap>>;
+  incrementSessionClickMap: (id: string) => void;
   id: string;
 }
 
@@ -14,12 +14,7 @@ export default function Tile(props: Props) {
   const { incrementCount, count, isCounting } = useCount(props.clicks);
 
   function handleClick() {
-    props.setSessionClickMap((map) => {
-      return {
-        ...map,
-        [props.id]: map[props.id] + 1,
-      };
-    });
+    props.incrementSessionClickMap(props.id);
     incrementCount();
   }
 
