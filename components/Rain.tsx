@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styles from "./Rain.module.scss";
+import RainDrop from "./RainDrop";
 
 interface Props {}
 
@@ -10,12 +11,11 @@ export default function Rain(props: Props) {
         const randomWidth = Math.random() * window.innerWidth;
         const randomHeight = Math.random() * window.innerHeight;
         return (
-          <path
+          <RainDrop
+            randomHeight={randomHeight}
+            randomWidth={randomWidth}
             key={indx}
-            d={`M${randomWidth} 0 L${randomWidth} ${randomHeight}`}
-            stroke="lightblue"
-            strokeWidth="1"
-          ></path>
+          />
         );
       })}
     </svg>
