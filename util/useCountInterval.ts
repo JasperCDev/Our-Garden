@@ -7,7 +7,8 @@ import { GetClicks } from "./GetClicksSWR";
 import { ClickMap } from "./types";
 import defaultClickMap from "./defaultClickMap";
 
-let isActive = false;
+let hasClicked = false;
+let isActive = true;
 
 export default function useCountInterval<T>(mutateKey: string) {
   const { data: clickMap } = GetClicks();
@@ -30,8 +31,9 @@ export default function useCountInterval<T>(mutateKey: string) {
   /* ----------------------------------------------------------------------------------------------- */
 
   async function getAndUpdateClicks(previousSessionClickMap: ClickMap) {
-    if (isActive) {
-      isActive = false;
+    if (!isActive) return;
+    if (hasClicked) {
+      hasClicked = false;
       await updateClicks(sessionClickMapRef.current);
     }
     await mutateRef.current(mutateKey);
@@ -51,8 +53,26 @@ export default function useCountInterval<T>(mutateKey: string) {
     }, MILLISECONDS_SERVER_INTERVAL);
     /* ----------------------------------------- */
 
-    // unsubscribe from interval on unmount
-    return () => clearInterval(interval);
+    let onBlur: (this: Window, ev: FocusEvent) => any;
+    let onFocus: (this: Window, ev: FocusEvent) => any;
+    if (typeof window !== undefined) {
+      onBlur = () => {
+        isActive = false;
+      };
+
+      onFocus = () => {
+        isActive = true;
+      };
+
+      window.addEventListener("blur", onBlur);
+      window.addEventListener("focus", onFocus);
+    }
+    // unsubscribe from subscriptions on unmount
+    return () => {
+      window.removeEventListener("blur", onBlur);
+      window.removeEventListener("focus", onFocus);
+      clearInterval(interval);
+    };
   }, []);
 
   function incrementSessionClickMap(id: string) {
