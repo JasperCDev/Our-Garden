@@ -1,11 +1,14 @@
 .rainDrop {
-  stroke-dasharray: var(--path-length);
-  stroke-dashoffset: calc(var(--path-length));
+
+  stroke-dashoffset: var(--path-length);
   animation-name: rain;
-  animation-duration: 2s;
+  animation-duration: var(--animation-duration);
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-direction: forwards;
+  stroke-width: 3;
+  stroke: lightblue;
+  stroke-linecap: round;
 }
 
 @keyframes rain {
