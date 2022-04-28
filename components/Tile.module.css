@@ -14,11 +14,15 @@
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
-  /* background-color: var(--background-color); */
-  /* transition: background-color 1s ease-in-out; */
+  background-color: var(--background-color);
+  transition: background-color 1s ease-in-out;
 }
 
 .tile:active {
-  /* background-color: #c2ffff;
-  transition: none; */
+  background-color: #c2ffff;
+  transition: none;
+}
+
+.tile h2 {
+  color: white;
 }

@@ -1,10 +1,4 @@
-import React, {
-  CSSProperties,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { CSSProperties, useMemo } from "react";
 import styles from "./RainDrop.module.scss";
 
 interface Props {
@@ -20,7 +14,6 @@ export default function RainDrop(props: Props) {
     <path
       className={styles.rainDrop}
       d={`M${props.randomWidth} 0 L${props.randomWidth} ${props.randomHeight}`}
-      stroke="lightblue"
       strokeDasharray={`${pathLength * 0.025} ${pathLength * 0.975}`}
       pathLength={pathLength}
       style={
