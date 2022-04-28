@@ -19,7 +19,9 @@ export default function RainDrop(props: Props) {
       style={
         {
           "--path-length": pathLength,
-          "--animation-duration": `${(pathLength / 500).toFixed(2)}s`,
+          "--animation-duration": `${(
+            props.randomHeight / window.innerHeight
+          ).toFixed(2)}s`,
         } as CSSProperties
       }
     ></path>
