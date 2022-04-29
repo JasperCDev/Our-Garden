@@ -9,7 +9,8 @@ export default function Rain(props: Props) {
     <svg className={styles.rain} width="100%" height="100%">
       {new Array(200).fill(1).map((_, indx) => {
         const randomWidth = Math.random() * window.innerWidth;
-        const randomHeight = Math.random() * window.innerHeight;
+        const randomHeight =
+          Math.random() * window.innerHeight * 0.8 + window.innerHeight * 0.2;
         return (
           <RainDrop
             randomHeight={randomHeight}
