@@ -8,17 +8,17 @@ interface Props {
 }
 
 export default function RainDrop(props: Props) {
-  const pathLength = useMemo(() => Math.random() * 500, []);
-
   return (
     <path
       className={styles.rainDrop}
       d={`M${props.randomWidth} 0 L${props.randomWidth} ${props.randomHeight}`}
-      strokeDasharray={`${pathLength * 0.025} ${pathLength * 0.975}`}
-      pathLength={pathLength}
+      strokeDasharray={`${50 / props.randomHeight} ${
+        (props.randomHeight - 50) / props.randomHeight
+      }`}
+      pathLength={1}
       style={
         {
-          "--path-length": pathLength,
+          "--path-length": 1,
           "--animation-duration": `${(
             props.randomHeight / window.innerHeight
           ).toFixed(2)}s`,
