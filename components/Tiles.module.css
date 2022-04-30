@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  min-height: 100vh;
+  height: 100vh;
   flex-direction: row;
-  gap: 20px;
+  gap: min(6vw, 2rem);
 }
