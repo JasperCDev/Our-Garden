@@ -7,7 +7,7 @@ interface Props {}
 type Raindrops = Array<[number, number]>;
 
 function getRaindrops() {
-  const rainDropCount = Math.floor(window.innerWidth / 10);
+  const rainDropCount = Math.floor(window.innerWidth / 5);
   const rainDrops: Raindrops = [];
 
   for (let i = 0; i < rainDropCount; i++) {
