@@ -12,7 +12,7 @@ const pathLength = 1;
 export default function Raindrop(props: Props) {
   const animationDelay = useMemo(() => `${Math.random() * 3}s`, []);
   const animationDuration = `${
-    props.randomHeight / (window.innerHeight * 0.5)
+    props.randomHeight / (window.innerHeight * 0.75)
   }s`;
   const translateY = `${-(props.randomHeight * 2)}px`;
 
