@@ -6,7 +6,7 @@
   animation-iteration-count: infinite;
   animation-direction: forwards;
   animation-delay: var(--animation-delay);
-  stroke-width: 1;
+  stroke-width: 0.1;
   stroke: lightcyan;
   transform: translateY(-10vh);
   stroke-linecap: round;
@@ -15,5 +15,6 @@
 @keyframes rain {
   100% {
     stroke-dashoffset: 0;
+    stroke-width: .5;
   }
 }
