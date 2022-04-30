@@ -24,7 +24,7 @@ export default function RainDrop(props: Props) {
     "--path-length": 1,
     "--animation-duration": animationDuration,
     "--translate-y": translateY,
-    "--animation-delay": `${animationDelay}s`,
+    "--animation-delay": animationDelay,
   } as CSSProperties;
 
   return (
