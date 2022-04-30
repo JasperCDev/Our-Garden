@@ -8,6 +8,8 @@ interface Props {
 }
 
 export default function RainDrop(props: Props) {
+  const animationDelay = useMemo(() => Math.random() * 3, []);
+
   return (
     <path
       className={styles.rainDrop}
@@ -22,6 +24,8 @@ export default function RainDrop(props: Props) {
           "--animation-duration": `${(
             props.randomHeight / window.innerHeight
           ).toFixed(2)}s`,
+          "--translate-y": `${-(props.randomHeight * 2)}px`,
+          "--animation-delay": `${animationDelay}s`,
         } as CSSProperties
       }
     ></path>

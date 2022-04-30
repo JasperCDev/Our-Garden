@@ -10,7 +10,7 @@ export default function Rain(props: Props) {
       {new Array(200).fill(1).map((_, indx) => {
         const randomWidth = Math.random() * window.innerWidth;
         const randomHeight =
-          Math.random() * window.innerHeight * 0.8 + window.innerHeight * 0.2;
+          Math.random() * window.innerHeight + window.innerHeight * 0.2;
         return (
           <RainDrop
             randomHeight={randomHeight}
