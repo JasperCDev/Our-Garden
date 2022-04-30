@@ -54,7 +54,7 @@ export default function Plant(props: Props) {
         xmlns="http://www.w3.org/2000/svg"
         className={styles.soil}
       >
-        <ellipse cx="50" cy="10" rx="50" ry="10" fill="#A0522D" />
+        <ellipse cx="50" cy="10" rx="50" ry="10" fill="#c97c59" />
       </svg>
       <svg
         width="100"

@@ -1,0 +1,20 @@
+.rainDrop {
+  stroke-dashoffset: var(--path-length);
+  animation-name: rain;
+  animation-duration: var(--animation-duration);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: forwards;
+  animation-delay: var(--animation-delay);
+  stroke-width: 0.1;
+  stroke: #008cff;
+  transform: translateY(-10vh);
+  stroke-linecap: round;
+}
+
+@keyframes rain {
+  100% {
+    stroke-dashoffset: 0;
+    stroke-width: .5;
+  }
+}

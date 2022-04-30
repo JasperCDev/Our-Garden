@@ -24,7 +24,7 @@ export default function Tile(props: Props) {
       onClick={handleClick}
       style={
         {
-          "--background-color": isCounting ? "lightcyan" : "white",
+          "--background-color": isCounting ? "lightcyan" : "transparent",
         } as React.CSSProperties
       }
     >
