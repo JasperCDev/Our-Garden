@@ -1,5 +1,5 @@
 import React, { CSSProperties, useMemo } from "react";
-import styles from "./RainDrop.module.scss";
+import styles from "./Raindrop.module.scss";
 
 interface Props {
   className?: string;
@@ -9,7 +9,7 @@ interface Props {
 
 const pathLength = 1;
 
-export default function RainDrop(props: Props) {
+export default function Raindrop(props: Props) {
   const animationDelay = useMemo(() => `${Math.random() * 3}s`, []);
   const animationDuration = `${props.randomHeight / window.innerHeight}s`;
   const translateY = `${-(props.randomHeight * 2)}px`;

@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Rain.module.scss";
-import RainDrop from "./RainDrop";
+import Raindrop from "./Raindrop";
 
 interface Props {}
 
@@ -39,7 +39,7 @@ export default function Rain(props: Props) {
     <svg className={styles.rain} width="100%" height="100%">
       {raindrops.map(([randomWidth, randomHeight], indx) => {
         return (
-          <RainDrop
+          <Raindrop
             randomHeight={randomHeight}
             randomWidth={randomWidth}
             key={indx}
