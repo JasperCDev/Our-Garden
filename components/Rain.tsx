@@ -1,18 +1,43 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./Rain.module.scss";
 import RainDrop from "./RainDrop";
 
 interface Props {}
 
+type Raindrops = Array<[number, number]>;
+
+function getRaindrops() {
+  const rainDropCount = Math.floor(window.innerWidth / 10);
+  const rainDrops: Raindrops = [];
+
+  for (let i = 0; i < rainDropCount; i++) {
+    const randomWidth = Math.random() * window.innerWidth;
+    const randomHeight =
+      Math.random() * window.innerHeight + window.innerHeight * 0.2;
+    rainDrops.push([randomWidth, randomHeight]);
+  }
+
+  return rainDrops;
+}
+
 export default function Rain(props: Props) {
-  let rainCount = Math.floor(window.innerWidth / 10);
+  const [raindrops, setRaindrops] = useState<Raindrops>([]);
+
+  useEffect(() => {
+    setRaindrops(getRaindrops());
+
+    function onResize() {
+      setRaindrops(getRaindrops());
+    }
+
+    window.addEventListener("resize", onResize);
+
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
   return (
     <svg className={styles.rain} width="100%" height="100%">
-      {new Array(rainCount).fill(1).map((_, indx) => {
-        const randomWidth = Math.random() * window.innerWidth;
-        const randomHeight =
-          Math.random() * window.innerHeight + window.innerHeight * 0.2;
+      {raindrops.map(([randomWidth, randomHeight], indx) => {
         return (
           <RainDrop
             randomHeight={randomHeight}
