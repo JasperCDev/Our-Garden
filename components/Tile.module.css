@@ -19,10 +19,6 @@
 }
 
 .tile:active {
-  background-color: #c2ffff;
+  background-color: lightcyan;
   transition: none;
-}
-
-.tile h2 {
-  color: white;
 }
