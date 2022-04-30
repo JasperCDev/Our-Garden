@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Rain.module.scss";
-import Raindrop from "./Raindrop";
+import Raindrop from "components/Raindrop";
 
 interface Props {}
 
