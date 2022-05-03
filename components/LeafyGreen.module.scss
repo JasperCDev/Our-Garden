@@ -1,0 +1,60 @@
+.plant {
+  animation: sway 3s infinite ease-in-out alternate;
+  animation-delay: 3s;
+  transform-origin: bottom;
+  --off-set: 250;
+  --stem-width: 1;
+
+  @for $i from 1 through 8 {
+    --leaf#{$i}-scale: 0.1;
+  }
+}
+
+@keyframes sway {
+  33% {
+    transform: rotate(5deg);
+    -webkit-transform: rotate(5deg);
+    -moz-transform: rotate(5deg);
+    -o-transform: rotate(5deg);
+  }
+  66% {
+    transform: rotate(10deg);
+    -webkit-transform: rotate(10deg);
+    -moz-transform: rotate(10deg);
+    -o-transform: rotate(10deg);
+   }
+  100% {
+    transform: rotate(-10deg);
+    -webkit-transform: rotate(-10deg);
+    -moz-transform: rotate(-10deg);
+    -o-transform: rotate(-10deg);
+   }
+}
+
+.stem {
+  stroke-dasharray: 250;
+  stroke-dashoffset: var(--off-set);
+  stroke-linecap: round;
+  stroke-width: var(--stem-width);
+  stroke: darkgreen;
+}
+
+.leaf {
+  fill: lightgreen;
+}
+
+@for $i from 1 through 8 {
+  .leaf#{$i} {
+    transform: scale(var(--leaf#{$i}-scale));
+    /*
+    the transform origin y-offset can be calculated this way because the odds and evens are evenly spaced respectively.
+
+    max() is used here so that the last two leaves have the same transform-origin y-offset of 5px.
+    */
+    @if $i % 2 == 0 {
+      transform-origin: 32px max(233px - ($i * 30.5), 5px);
+    } @else {
+      transform-origin: 32px max(216.5px - ($i * 30.5), 5px);
+    }
+  }
+}
