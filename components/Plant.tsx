@@ -1,5 +1,5 @@
 import React from "react";
-import LeafyGreen from "./leafyGreen";
+import LeafyGreen from "./LeafyGreen";
 import styles from "./Plant.module.scss";
 
 interface Props {
